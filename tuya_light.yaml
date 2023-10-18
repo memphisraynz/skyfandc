@@ -25,7 +25,7 @@ light:
     warm_white_color_temperature: 1
     color_temperature_datapoint: true
     restore_mode: ALWAYS_ON
-    disabled_by_default: true
+    disabled_by_default: false
 
 # select:
 #   - id: datapoint_light_color_temperature
