@@ -3,14 +3,14 @@ packages:
     file: tuya_fan.yaml  
   skyfan.tuya_light: !include
      file: tuya_light.yaml  
-  skyfan.sensor_ntc: !include
-    file: sensor_ntc.yaml 
-  skyfan.sensor_tmp117: !include
-    file: sensor_tmp117.yaml 
-  skyfan.sensor_power_fan: !include
-    file: sensor_power_fan.yaml 
-  skyfan.sensor_power_light: !include
-     file: sensor_power_light.yaml 
+#  skyfan.sensor_ntc: !include
+#    file: sensor_ntc.yaml 
+#  skyfan.sensor_tmp117: !include
+#    file: sensor_tmp117.yaml 
+#  skyfan.sensor_power_fan: !include
+#    file: sensor_power_fan.yaml 
+#  skyfan.sensor_power_light: !include
+#     file: sensor_power_light.yaml 
 
 substitutions:
   device_name: easy-skyfandc
@@ -40,7 +40,7 @@ esp8266:
 
 #Dashboard import if you want to adopt the device on your esphome dashboard
 dashboard_import:
-  package_import_url: github://jeggleston1981/skyfandc/micro_skyfan2.yaml
+  package_import_url: github://memphisraynz/skyfandc/micro_skyfan2.yaml
 
 api:
 
