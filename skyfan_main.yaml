@@ -1,3 +1,9 @@
+packages:
+  skyfan.tuya_fan: !include
+    file: tuya_fan.yaml  
+  skyfan.tuya_light: !include
+     file: tuya_light.yaml  
+
 substitutions:
   device_name: easy-skyfandc
   fan_name: SkyFanDC
