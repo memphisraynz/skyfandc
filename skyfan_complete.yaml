@@ -298,3 +298,14 @@ light:
     warm_white_color_temperature: 3000 K
     restore_mode: ALWAYS_OFF
     disabled_by_default: false
+ select:
+   - id: datapoint_light_color_temperature
+     platform: tuya
+     tuya_id: tuyamcu
+     name: ${light_name} Color Temperature
+     enum_datapoint: 19
+     options:
+       0: 'WARM WHITE (3000K)'
+       1: 'NATURAL WHITE (4200K)'
+       2: 'COOL WHITE (6500K)'
+     disabled_by_default: false
