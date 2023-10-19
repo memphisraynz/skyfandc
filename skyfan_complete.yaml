@@ -1,9 +1,9 @@
 substitutions:
   device_name: easy-skyfandc
-  fan_name: SkyFanDC
-  light_name: SkyFanDC-Light
   temp_name: SkyFanDC-Temp
   skyfan_model: "SKY1203"
+  light_name: "SkyFan DC Light"
+  fan_name: "SkyFan DC Fan"
 
 esphome:
   name: ${device_name}
@@ -51,7 +51,27 @@ uart:
   baud_rate: 9600
 
 tuya:
-  id: tuyamcu  
+id: tuyamcu
+on_datapoint_update:
+  - sensor_datapoint: 1
+    datapoint_type: bool
+    then:
+      - switch.turn_on: update_fan
+  - sensor_datapoint: 2
+    datapoint_type: enum
+    then:
+      - switch.turn_on: update_fan 
+  - sensor_datapoint: 3
+    datapoint_type: int
+    then:
+      - switch.turn_on: update_fan
+  - sensor_datapoint: 8
+    datapoint_type: enum
+    then:
+      - switch.turn_on: update_fan
+  - sensor_datapoint: 22
+    datapoint_type: enum
+    then: []
 
 switch:
   - platform: gpio
@@ -59,9 +79,60 @@ switch:
       number: 2
       inverted: true
     id: led
+  - id: update_fan
+    platform: template
+    optimistic: true
+    turn_on_action:
+      then:
+        - delay: 200ms
+        - if:
+            condition: 
+              - switch.is_on: datapoint_onoff
+            then:
+              - if:
+                  condition:
+                    - lambda: 'return ( id(datapoint_mode).active_index() == 1 );'
+                  then:
+                    - logger.log: "update_fan ECO therefore set speed 2"
+                    - fan.turn_on: 
+                        id: skyfan
+                        speed: '2'
+                        direction: !lambda |-
+                          bool val = ( id(datapoint_direction).active_index() != 0 );
+                          return val ? FanDirection::REVERSE : FanDirection::FORWARD;
+                  else:
+                    - if:
+                        condition:
+                          - lambda: 'return ( id(datapoint_speed).state == 1 );'
+                        then:
+                          - logger.log: "update_fan Set speed 1"
+                          - fan.turn_on: 
+                              id: skyfan
+                              speed: '1'
+                              direction: !lambda |-
+                                bool val = ( id(datapoint_direction).active_index() != 0 );
+                                return val ? FanDirection::REVERSE : FanDirection::FORWARD;
+                        else:
+                          - logger.log: "update_fan Set speed plus 1"
+                          - fan.turn_on: 
+                              id: skyfan
+                              speed: !lambda |-
+                                return (id(datapoint_speed).state + 1);
+                              direction: !lambda |-
+                                bool val = ( id(datapoint_direction).active_index() != 0 );
+                                return val ? FanDirection::REVERSE : FanDirection::FORWARD;
+            else:
+              - logger.log: "update_fan Turn off"
+              - fan.turn_off: 
+                  id: skyfan            
 
-substitutions:
-  fan_name: "SkyFan DC Fan"
+  - id: datapoint_onoff
+    platform: tuya
+    tuya_id: tuyamcu
+    name: ${fan_name} Switch
+    switch_datapoint: 1
+    internal: true
+
 
 fan:
   - id: skyfan
@@ -155,86 +226,7 @@ output:
     platform: template
     type: binary
     write_action: []
-
-tuya:
-  id: tuyamcu
-  on_datapoint_update:
-    - sensor_datapoint: 1
-      datapoint_type: bool
-      then:
-        - switch.turn_on: update_fan
-    - sensor_datapoint: 2
-      datapoint_type: enum
-      then:
-        - switch.turn_on: update_fan 
-    - sensor_datapoint: 3
-      datapoint_type: int
-      then:
-        - switch.turn_on: update_fan
-    - sensor_datapoint: 8
-      datapoint_type: enum
-      then:
-        - switch.turn_on: update_fan
-    - sensor_datapoint: 22
-      datapoint_type: enum
-      then: []
-
-switch:
-  # A datapoint has changed in tuyamcu. Update the fan entity in Home Assistant 
-  # to be consistent with the new datapoint values.
-  - id: update_fan
-    platform: template
-    optimistic: true
-    turn_on_action:
-      then:
-        - delay: 200ms
-        - if:
-            condition: 
-              - switch.is_on: datapoint_onoff
-            then:
-              - if:
-                  condition:
-                    - lambda: 'return ( id(datapoint_mode).active_index() == 1 );'
-                  then:
-                    - logger.log: "update_fan ECO therefore set speed 2"
-                    - fan.turn_on: 
-                        id: skyfan
-                        speed: '2'
-                        direction: !lambda |-
-                          bool val = ( id(datapoint_direction).active_index() != 0 );
-                          return val ? FanDirection::REVERSE : FanDirection::FORWARD;
-                  else:
-                    - if:
-                        condition:
-                          - lambda: 'return ( id(datapoint_speed).state == 1 );'
-                        then:
-                          - logger.log: "update_fan Set speed 1"
-                          - fan.turn_on: 
-                              id: skyfan
-                              speed: '1'
-                              direction: !lambda |-
-                                bool val = ( id(datapoint_direction).active_index() != 0 );
-                                return val ? FanDirection::REVERSE : FanDirection::FORWARD;
-                        else:
-                          - logger.log: "update_fan Set speed plus 1"
-                          - fan.turn_on: 
-                              id: skyfan
-                              speed: !lambda |-
-                                return (id(datapoint_speed).state + 1);
-                              direction: !lambda |-
-                                bool val = ( id(datapoint_direction).active_index() != 0 );
-                                return val ? FanDirection::REVERSE : FanDirection::FORWARD;
-            else:
-              - logger.log: "update_fan Turn off"
-              - fan.turn_off: 
-                  id: skyfan            
-
-  - id: datapoint_onoff
-    platform: tuya
-    tuya_id: tuyamcu
-    name: ${fan_name} Switch
-    switch_datapoint: 1
-    internal: true
+  
   
 select:
   - id: datapoint_mode
@@ -290,9 +282,6 @@ number:
     max_value: 5
     step: 1
     internal: true
-
-substitutions:
-  light_name: "SkyFan DC Light"
 
 light:
   - id: skyfan_light
