@@ -23,7 +23,7 @@ esp8266:
 
 #Dashboard import if you want to adopt the device on your esphome dashboard
 dashboard_import:
-  package_import_url: github://memphisraynz/skyfandc/skyfan_main.yaml@main
+  package_import_url: github://memphisraynz/skyfandc/skyfan_complete.yaml@main
 
 api:
 
