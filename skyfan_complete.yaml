@@ -51,27 +51,27 @@ uart:
   baud_rate: 9600
 
 tuya:
-id: tuyamcu
-on_datapoint_update:
-  - sensor_datapoint: 1
-    datapoint_type: bool
-    then:
-      - switch.turn_on: update_fan
-  - sensor_datapoint: 2
-    datapoint_type: enum
-    then:
-      - switch.turn_on: update_fan 
-  - sensor_datapoint: 3
-    datapoint_type: int
-    then:
-      - switch.turn_on: update_fan
-  - sensor_datapoint: 8
-    datapoint_type: enum
-    then:
-      - switch.turn_on: update_fan
-  - sensor_datapoint: 22
-    datapoint_type: enum
-    then: []
+  id: tuyamcu
+  on_datapoint_update:
+    - sensor_datapoint: 1
+      datapoint_type: bool
+      then:
+        - switch.turn_on: update_fan
+    - sensor_datapoint: 2
+      datapoint_type: enum
+      then:
+        - switch.turn_on: update_fan 
+    - sensor_datapoint: 3
+      datapoint_type: int
+      then:
+        - switch.turn_on: update_fan
+    - sensor_datapoint: 8
+      datapoint_type: enum
+      then:
+        - switch.turn_on: update_fan
+    - sensor_datapoint: 22
+      datapoint_type: enum
+      then: []
 
 switch:
   - platform: gpio
