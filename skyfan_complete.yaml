@@ -293,7 +293,6 @@ light:
     max_value: 5
     color_temperature_datapoint: 19
     color_temperature_max_value: 2
-    cold_white_color_temperature: 2
-    warm_white_color_temperature: 1
+    color_temperature_invert: true
     restore_mode: ALWAYS_OFF
     disabled_by_default: false
