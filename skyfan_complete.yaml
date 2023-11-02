@@ -239,6 +239,13 @@ select:
       1: ECO
       2: SLEEP
     disabled_by_default: true
+  - platform: tuya
+    name: ${light_name} Color Temperature
+    enum_datapoint: 19
+    options:
+      0: Cool White
+      1: Neutral White
+      2: Warm White
 
   - id: datapoint_direction
     platform: tuya
