@@ -300,7 +300,7 @@ light:
     max_value: 5
     color_temperature_datapoint: 19
     color_temperature_max_value: 2
-    color_temperature_invert: true
+    color_temperature_invert: false
     cold_white_color_temperature: 6500 K
     warm_white_color_temperature: 3000 K
     restore_mode: ALWAYS_OFF
