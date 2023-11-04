@@ -241,7 +241,7 @@ select:
     disabled_by_default: true
   - platform: tuya
     name: ${light_name} Color Temperature
-    enum_datapoint: 191
+    enum_datapoint: 19
     options:
       0: Cool White
       1: Neutral White
