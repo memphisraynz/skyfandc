@@ -301,7 +301,7 @@ light:
     color_temperature_datapoint: 19
     color_temperature_max_value: 2
     color_temperature_invert: false
-    cold_white_color_temperature: 6500 K
-    warm_white_color_temperature: 3000 K
+    cold_white_color_temperature: 153.8 midreds
+    warm_white_color_temperature: 333.3 midreds
     restore_mode: ALWAYS_OFF
     disabled_by_default: false
