@@ -38,6 +38,7 @@ i2c:
   scl: 5
   scan: true
 ota:
+  - platform: esphome
 
 wifi:
   ap:
