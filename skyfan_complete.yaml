@@ -1,0 +1,79 @@
+packages:
+  skyfan.tuya_fan: !include
+    file: supplemental/tuya_fan.yaml  
+  skyfan.tuya_light: !include
+    file: supplemental/tuya_light.yaml  
+  # skyfan.sensor_ntc: !include
+  #   file: supplemental/sensor_ntc.yaml 
+  # skyfan.sensor_tmp117: !include
+  #   file: supplemental/sensor_tmp117.yaml 
+  # skyfan.sensor_power_fan: !include
+  #   file: supplemental/sensor_power_fan.yaml 
+  # skyfan.sensor_power_light: !include
+  #   file: supplemental/sensor_power_light.yaml
+  # skyfan.sensor_rssi: !include
+  #   file: supplemental/sensor_rssi.yaml
+
+substitutions:
+  device_name: easy-skyfandc
+  temp_name: SkyFanDC-Temp
+  skyfan_model: "SKY1203"
+  light_name: "SkyFan DC Light"
+  fan_name: "SkyFan DC Fan"
+
+esphome:
+  name: ${device_name}
+  name_add_mac_suffix: true
+ project:
+    name: memphisraynz.easy_skyfandc
+    version: "0.9.1"
+  # on_boot: #Setup temperature reading so you don't get a random reading come through at startup
+  #   priority: -100
+  #   then:
+  #     - switch.turn_on: led
+  #     - delay: 2s
+  #     - switch.turn_off: led
+      
+esp8266:
+  board: d1_mini
+#web_server:
+#  port: 80
+
+#Dashboard import if you want to adopt the device on your esphome dashboard
+dashboard_import:
+  package_import_url: github://memphisraynz/skyfandc/skyfan_complete.yaml@main
+
+api:
+
+# Logger not using the serial port as tuya needs it
+logger:
+  baud_rate: 0
+
+# Version 0.2 has an i2c JST SH 4Pin Plug and uses the following pins
+# Version 0.1 did use pin 4 as the power pin for the NTC
+i2c:
+  sda: 4
+  scl: 5
+  scan: true
+ota:
+
+wifi:
+  ap:
+    password: ""
+    
+captive_portal:
+
+uart:
+  rx_pin: GPIO3
+  tx_pin: GPIO1
+  baud_rate: 9600
+
+tuya:
+  id: tuyamcu  
+
+switch:
+  - platform: gpio
+    pin:
+      number: 2
+      inverted: true
+    id: led
