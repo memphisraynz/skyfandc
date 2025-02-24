@@ -3,16 +3,6 @@ packages:
     file: supplemental/tuya_fan.yaml
   skyfan.tuya_light: !include
     file: supplemental/tuya_light.yaml
-  skyfan.sensor_ntc: !include
-    file: supplemental/sensor_ntc.yaml
-  skyfan.sensor_tmp117: !include
-    file: supplemental/sensor_tmp117.yaml
-  skyfan.sensor_power_fan: !include
-    file: supplemental/sensor_power_fan.yaml
-  skyfan.sensor_power_light: !include
-    file: supplemental/sensor_power_light.yaml
-  skyfan.sensor_rssi: !include
-    file: supplemental/sensor_rssi.yaml
 
 substitutions:
   device_name: easy-skyfandc
