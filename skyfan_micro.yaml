@@ -1,8 +1,8 @@
-packages:
-  skyfan.tuya_fan: !include
-    file: supplemental/tuya_fan.yaml  
-  skyfan.tuya_light: !include
-    file: supplemental/tuya_light.yaml  
+# packages:
+#   skyfan.tuya_fan: !include
+#     file: supplemental/tuya_fan.yaml  
+#   skyfan.tuya_light: !include
+#     file: supplemental/tuya_light.yaml  
   # skyfan.sensor_ntc: !include
   #   file: supplemental/sensor_ntc.yaml 
   # skyfan.sensor_tmp117: !include
