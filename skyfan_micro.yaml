@@ -16,7 +16,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: memphisraynz.easy_skyfandc
-    version: "0.9.1"
+    version: "0.9.2"
 
 esp8266:
   board: d1_mini
