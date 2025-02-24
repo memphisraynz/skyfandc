@@ -32,7 +32,7 @@ select:
       0: 'WARM WHITE (3000K)'
       1: 'NATURAL WHITE (4200K)'
       2: 'COOL WHITE (6500K)'
-    disabled_by_default: true
+    disabled_by_default: false
 
 # tuya:
 #   id: tuyamcu
