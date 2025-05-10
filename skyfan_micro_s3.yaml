@@ -15,19 +15,13 @@ esphome:
   name: ${device_name}
   name_add_mac_suffix: true
   project:
-    name: memphisraynz.easy_skyfandc.esp32s3
-    version: "0.9.3" # Or your current version
-  # platformio_options:
-  #   build_flags: -DBOARD_HAS_PSRAM
-  #   board_build.arduino.memory_type: qio_opi
-  #   board_build.f_flash: 80000000L
-  #   board_build.flash_mode: qio 
+    name: memphisraynz.easy_skyfandc_s3
+    version: "0.9.3"
 
 esp32:
-  board: seeed_xiao_esp32s3
+  board: esp32-s3-devkitc-1
   framework:
     type: arduino
-    #type: esp-idf # Recommended for ESP32-S3
 
 dashboard_import:
   package_import_url: github://memphisraynz/skyfandc/skyfan_micro_s3.yaml@main # Review this for ESP32 compatibility
