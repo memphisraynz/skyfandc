@@ -22,7 +22,9 @@ light:
     restore_mode: RESTORE_DEFAULT_OFF
     disabled_by_default: false
     on_turn_on:
-    - brightness: 20%
+    - light.control
+      id: skyfan_light
+      brightness: 20%
 
 select:
   - id: datapoint_light_color_temperature
