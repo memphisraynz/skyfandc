@@ -24,7 +24,7 @@ light:
     on_turn_on:
     - light.control
         id: skyfan_light
-        brightness: 20%
+    - logger.log: "Light Turned On!"
 
 select:
   - id: datapoint_light_color_temperature
