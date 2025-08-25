@@ -24,6 +24,7 @@ light:
     on_turn_on:
     - light.control
         id: skyfan_light
+        brightness: 20%
     - logger.log: "Light Turned On!"
 
 select:
