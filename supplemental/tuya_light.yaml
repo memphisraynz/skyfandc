@@ -23,8 +23,8 @@ light:
     disabled_by_default: false
     on_turn_on:
     - light.control
-      id: skyfan_light
-      brightness: 20%
+        id: skyfan_light
+        brightness: 20%
 
 select:
   - id: datapoint_light_color_temperature
