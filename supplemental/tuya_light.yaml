@@ -15,13 +15,14 @@ light:
     dimmer_datapoint: 16
     min_value: 0
     max_value: 5
-    brightness: 20%
 #    color_temperature_datapoint: 19
 #    color_temperature_max_value: 2
 #    color_temperature_invert: true
 #    color_mode: BRIGHTNESS # [color_mode] is an invalid option for [light.tuya]. 
     restore_mode: RESTORE_DEFAULT_OFF
     disabled_by_default: false
+    on_turn_on:
+    - brightness: 20%
 
 select:
   - id: datapoint_light_color_temperature
