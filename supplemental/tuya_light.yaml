@@ -22,9 +22,10 @@ light:
     restore_mode: RESTORE_DEFAULT_OFF
     disabled_by_default: false
     on_turn_on:
-    - light.control
-        id: skyfan_light
-    - logger.log: "Light Turned On!"
+      then:
+        - light.turn_on:
+            id: skyfan_light
+            brightness: 20%
 
 select:
   - id: datapoint_light_color_temperature
