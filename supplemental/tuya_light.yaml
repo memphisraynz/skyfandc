@@ -23,7 +23,7 @@ light:
     disabled_by_default: false
     on_turn_on:
       then:
-        - delay: 500ms
+        - delay: 100ms
         - light.turn_on:
             id: skyfan_light
             brightness: 20%
