@@ -53,8 +53,8 @@ tuya:
   id: tuyamcu
 
 uart:
-  tx_pin: uart_tx
-  rx_pin: uart_rx
+  tx_pin: ${uart_tx}
+  rx_pin: ${uart_rx}
   baud_rate: 9600
   rx_full_threshold: 8
 
