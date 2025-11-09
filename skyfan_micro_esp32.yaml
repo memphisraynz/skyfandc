@@ -15,21 +15,21 @@ esphome:
   name: ${device_name}
   name_add_mac_suffix: true
   project:
-    name: memphisraynz.easy_skyfandc
-    version: "0.9.2"
+    name: memphisraynz.easy_skyfandc_esp32
+    version: "0.9.5"
 
 dashboard_import:
-  package_import_url: github://memphisraynz/skyfandc/skyfan_micro.yaml@main
+  package_import_url: github://memphisraynz/skyfandc/skyfan_micro_esp32.yaml@main
 
 api:
 
 logger:
   baud_rate: 0
 
-i2c:
-  sda: 4
-  scl: 5
-  scan: true
+# i2c:
+#   sda: 4
+#   scl: 5
+#   scan: true
 
 ota:
   - platform: esphome  
@@ -38,7 +38,7 @@ wifi:
   ap:
     password: ""
     
-captive_portal:
+# captive_portal:
 
 tuya:
   id: tuyamcu  
