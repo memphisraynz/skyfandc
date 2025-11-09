@@ -5,24 +5,32 @@ packages:
     file: supplemental/tuya_light.yaml
 
 substitutions:
-  device_name: easy-skyfandc
-  temp_name: SkyFanDC-Temp
+  device_name: skyfandc
+  device_friendly_name: skyfandc
   skyfan_model: "SKY1203"
-  light_name: "SkyFan DC Light"
-  fan_name: "SkyFan DC Fan"
+  temp_name: ${device_friendly_name "Temperature"}
+  light_name: ${device_friendly_name "Light"}
+  fan_name: ${device_friendly_name "Fan"}
+  uart_tx: uart_tx
+  uart_rx: uart_rx
 
 esphome:
   name: ${device_name}
-  name_add_mac_suffix: true
+  friendly_name: ${device_friendly_name}
+  name_add_mac_suffix: false
   project:
-    name: memphisraynz.easy_skyfandc_esp32
+    name: memphisraynz.skyfandc_esp32
     version: "0.9.5"
+
+esp32:
+  board: esp32-s3-devkitc-1
 
 dashboard_import:
   package_import_url: github://memphisraynz/skyfandc/skyfan_micro_esp32.yaml@main
 
 api:
 
+# Disable logging
 logger:
   baud_rate: 0
 
@@ -35,13 +43,20 @@ ota:
   - platform: esphome  
 
 wifi:
-  ap:
-    password: ""
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  domain: .lan
     
 # captive_portal:
 
 tuya:
-  id: tuyamcu  
+  id: tuyamcu
+
+uart:
+  tx_pin: uart_tx
+  rx_pin: uart_rx
+  baud_rate: 9600
+  rx_full_threshold: 8
 
 switch:
   - platform: gpio
