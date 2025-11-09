@@ -186,7 +186,7 @@ select:
       0: NORMAL
       1: ECO
       2: SLEEP
-    disabled_by_default: true
+    disabled_by_default: false
 
   - id: datapoint_direction
     platform: tuya
@@ -217,7 +217,7 @@ select:
       10: 10_HOUR
       11: 11_HOUR
       12: 12_HOUR
-    disabled_by_default: true
+    disabled_by_default: false
 
 number:
 
